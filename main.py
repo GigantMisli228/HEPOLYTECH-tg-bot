@@ -6,6 +6,9 @@ import requests
 # написать базу и импорт SQL
 # проверка на 200
 # кнопки
+# карта политеха
+# карта столовок
+# контакты преподов
 
 bot = telebot.TeleBot('5255747551:AAGM3zvW7eJSorp1F8LrX4oJ0GqgYvMhK6U')
 
@@ -100,11 +103,6 @@ weekdays = {
     6: 'СУББОТА'
 }
 
-fizmeh = {}
-fizmeh.update(fizmeh1)
-fizmeh.update(fizmeh2)
-fizmeh.update(fizmeh3)
-fizmeh.update(fizmeh4)
 
 @bot.message_handler(commands=['start'])
 def start(message):
