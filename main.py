@@ -2,7 +2,10 @@ import telebot
 from telebot import types
 import requests
 
-
+#TODO
+# написать базу и импорт SQL
+# проверка на 200
+# кнопки
 
 bot = telebot.TeleBot('5255747551:AAGM3zvW7eJSorp1F8LrX4oJ0GqgYvMhK6U')
 
@@ -270,10 +273,7 @@ def getLessons(lessons):
         output_message += f'\t\t\t\t\t📍ауд. {classroom}\n'
         output_message += f'\t\t\t\t\t👨‍🏫{full_name}\n'
 
-#TODO
-# subject: aud, building, teacher,
-# проверка на 200
-# кнопки
+
 
 
 
