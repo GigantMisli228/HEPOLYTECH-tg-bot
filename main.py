@@ -1,7 +1,6 @@
 import telebot
 from telebot import types
 import requests
-import json
 
 
 
@@ -98,6 +97,12 @@ weekdays = {
     6: 'СУББОТА'
 }
 
+fizmeh = {}
+fizmeh.update(fizmeh1)
+fizmeh.update(fizmeh2)
+fizmeh.update(fizmeh3)
+fizmeh.update(fizmeh4)
+
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, 'Приветствую, Политехник!. Чтобы увидеть расписание, введи номер своей группы в формате <b>ХХХХХХХ/ХХХХХ</b>, либо воспользуйся командой /timetable. Нажми /map чтобы посмотреть карту кампуса.', parse_mode= 'html')
@@ -162,7 +167,7 @@ def fizmeh4Groups(message):
 
 
 #отправляет get-запрос на сайт спбпу и получает json(структура данных)
-def sendGet1(group_numb):
+def sendGet1(message, group_numb):
     target_url = "https://ruz.spbstu.ru/api/v1/ruz/scheduler/"
     print(group_numb)
 
@@ -171,9 +176,10 @@ def sendGet1(group_numb):
         resp = requests.get(target_url)
     except:
         bot.send_message(message.chat.id, 'Что-то пошло не так')
+        return
     return resp.json()
 
-def sendGet2(group_numb):
+def sendGet2(message, group_numb):
     target_url = "https://ruz.spbstu.ru/api/v1/ruz/scheduler/"
     print(group_numb)
 
@@ -182,9 +188,10 @@ def sendGet2(group_numb):
         resp = requests.get(target_url)
     except:
         bot.send_message(message.chat.id, 'Что-то пошло не так')
+        return
     return resp.json()
 
-def sendGet3(group_numb):
+def sendGet3(message, group_numb):
     target_url = "https://ruz.spbstu.ru/api/v1/ruz/scheduler/"
     print(group_numb)
 
@@ -193,9 +200,10 @@ def sendGet3(group_numb):
         resp = requests.get(target_url)
     except:
         bot.send_message(message.chat.id, 'Что-то пошло не так')
+        return
     return resp.json()
 
-def sendGet4(group_numb):
+def sendGet4(message, group_numb):
     target_url = "https://ruz.spbstu.ru/api/v1/ruz/scheduler/"
     print(group_numb)
 
@@ -204,6 +212,7 @@ def sendGet4(group_numb):
         resp = requests.get(target_url)
     except:
         bot.send_message(message.chat.id, 'Что-то пошло не так')
+        return
     return resp.json()
 
 #разбиваем полученный json на дни недели
@@ -293,22 +302,22 @@ def get_user_message(message):
         fizmeh4Groups(message)
     else:
         if message.text in fizmeh1.keys():
-            schedule_json = sendGet1(message.text)
+            schedule_json = sendGet1(message, message.text)
             getDays(schedule_json['days'])
             #print(f"start week day - {schedule_json['week']['date_start']}, end week day - {schedule_json['week']['date_end']}")
             bot.send_message(message.chat.id, output_message, parse_mode= 'html')
         elif message.text in fizmeh2.keys():
-            schedule_json = sendGet2(message.text)
+            schedule_json = sendGet2(message, message.text)
             getDays(schedule_json['days'])
             #print(f"start week day - {schedule_json['week']['date_start']}, end week day - {schedule_json['week']['date_end']}")
             bot.send_message(message.chat.id, output_message, parse_mode= 'html')
         elif message.text in fizmeh3.keys():
-            schedule_json = sendGet3(message.text)
+            schedule_json = sendGet3(message, message.text)
             getDays(schedule_json['days'])
             #print(f"start week day - {schedule_json['week']['date_start']}, end week day - {schedule_json['week']['date_end']}")
             bot.send_message(message.chat.id, output_message, parse_mode= 'html')
         if message.text in fizmeh4.keys():
-            schedule_json = sendGet4(message.text)
+            schedule_json = sendGet4(message, message.text)
             getDays(schedule_json['days'])
             #print(f"start week day - {schedule_json['week']['date_start']}, end week day - {schedule_json['week']['date_end']}")
             bot.send_message(message.chat.id, output_message, parse_mode= 'html')
