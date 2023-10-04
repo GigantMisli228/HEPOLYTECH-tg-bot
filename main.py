@@ -10,7 +10,7 @@ import vk_api
 import configparser
 from telebot.types import InputMediaPhoto
 
-bot = telebot.TeleBot('5255747551:AAGVsNxhoQRC90OqLcYms2j6fBQMozs-l2Q')
+bot = telebot.TeleBot('...')
 
 # Считываем настройки
 config_path = os.path.join(sys.path[0], 'settings.ini')
